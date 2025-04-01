@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "yamuna",
+  "productName": "Yamuna",
   "version": "0.1.0",
   "identifier": "com.yamuna.app",
   "build": {
@@ -10,9 +10,9 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "yamuna",
-        "width": 800,
-        "height": 600
+        "title": "Yamuna",
+        "width": 1920,
+        "height": 1080
       }
     ],
     "security": {
