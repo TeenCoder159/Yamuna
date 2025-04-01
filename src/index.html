@@ -1,39 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri App</title>
-    <script type="module" src="/main.js" defer></script>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="styles.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Yamuna IDE</title>
+        <script type="module" src="/main.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
 
-  <body>
-    <main class="container">
-      <h1>Welcome to Tauri</h1>
-
-      <div class="row">
-        <a href="https://tauri.app" target="_blank">
-          <img src="/assets/tauri.svg" class="logo tauri" alt="Tauri logo" />
-        </a>
-        <a
-          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-          target="_blank"
-        >
-          <img
-            src="/assets/javascript.svg"
-            class="logo vanilla"
-            alt="JavaScript logo"
-          />
-        </a>
-      </div>
-      <p>Click on the Tauri logo to learn more about the framework</p>
-
-      <form class="row" id="greet-form">
-        <input id="greet-input" placeholder="Enter a name..." />
-        <button type="submit">Greet</button>
-      </form>
-      <p id="greet-msg"></p>
-    </main>
-  </body>
+    <body>
+        <main class="container">
+            <div class="row main">
+                <div id="editor">
+                    <div class="open-files">
+                        <span>script.js</span>
+                        <span>remote.rs</span>
+                        <span>main.cpp</span>
+                    </div>
+                    <code class="code" id="testing-id">
+                        <textarea id="editor"></textarea>
+                    </code>
+                </div>
+                <div class="row panel">
+                    <div class="column" id="always-show">
+                        <button class="btn icon-btn">
+                            <img
+                                class="image-btn"
+                                id="files"
+                                src="assets/folder.png"
+                            />
+                        </button>
+                        <button class="btn icon-btn">
+                            <img
+                                class="image-btn"
+                                id="run"
+                                src="assets/bug.png"
+                            />
+                        </button>
+                    </div>
+                    <div class="column" id="toggle-panel">
+                        <div>TODO! FILE STRUCTURE</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
