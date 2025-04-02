@@ -2,7 +2,11 @@
 ## Yamuna is a holy river in India 🇮🇳 which is where I got this name from
 
 ## Progress:
+1 Of April:
 ![Progress of Yamuna](Progress/april-1.png)
+
+2 of April first half of the day:
+![Progress of Yamuna](Progress/april-2-1.png)
 
 ---
 ### Icon attributions:
