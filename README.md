@@ -6,7 +6,7 @@
 ![Progress of Yamuna](Progress/april-1.png)
 
 2 of April first half of the day:
-![Progress of Yamuna](Progress/april-2-1.png)
+![Progress of Yamuna](Progress/april-2-2.png)
 
 
 
