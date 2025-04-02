@@ -16,39 +16,43 @@
 
     <body>
         <main class="container">
+            <div class="toolbar row">
+                <div class="open-files">
+                    <button class="tab"><span>script.js</span></button>
+                    <button class="tab"><span>remote.rs</span></button>
+                    <button class="tab">
+                        <span class="active-tab">main.py</span>
+                    </button>
+                </div>
+                <div class="row" id="tools">
+                    <button id="files" class="btn icon-btn">
+                        <img
+                            class="image-btn"
+                            id="files"
+                            src="assets/folder.png"
+                        />
+                    </button>
+                </div>
+            </div>
+
             <div class="row main">
-                <div id="editor">
-                    <div class="open-files">
-                        <span>script.js</span>
-                        <span>remote.rs</span>
-                        <span>main.cpp</span>
-                    </div>
+                <div id="editor-panel">
                     <code class="code" id="testing-id">
-                        <textarea id="editor"></textarea>
+                        <textarea autocorrect="false" id="editor">
+def main():
+    print("Hello, World")
+if __name__ == "__main__":
+    main()</textarea
+                        >
                     </code>
                 </div>
-                <div class="row panel">
-                    <div class="column" id="always-show">
-                        <button class="btn icon-btn">
-                            <img
-                                class="image-btn"
-                                id="files"
-                                src="assets/folder.png"
-                            />
-                        </button>
-                        <button class="btn icon-btn">
-                            <img
-                                class="image-btn"
-                                id="run"
-                                src="assets/bug.png"
-                            />
-                        </button>
-                    </div>
-                    <div class="column" id="toggle-panel">
-                        <div>TODO! FILE STRUCTURE</div>
+                <div id="toggle-panel" class="row main-panel">
+                    <div class="column panel toggle" id="toggle-file">
+                        <div id="filing">TODO! FILE STRUCTURING</div>
                     </div>
                 </div>
             </div>
+            <div id="terminal"></div>
         </main>
     </body>
 </html>

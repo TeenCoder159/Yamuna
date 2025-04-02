@@ -29,11 +29,19 @@
     margin: 0;
 }
 
+@font-face {
+    font-family: "Main"; /* Choose any name you want */
+    src: url("assets/raela-grotesque-font/RaelaGrotesqueRegular-e9476.ttf")
+        format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: var(--bg-clr);
     height: 100vh;
     width: 100vw;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Main", Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -58,39 +66,78 @@ body {
     align-items: center;
 }
 
+#editor-panel {
+    width: 100%;
+    height: 100vh;
+}
+
+.toolbar {
+    display: flex;
+    justify-content:;
+}
+
 .open-files {
     padding: 0;
     display: flex;
+    overflow-x: auto;
+    width: 85vw;
 }
 
 .open-files span {
+    padding: 8px 12px;
+    background-color: var(--element-background);
     border: 1px solid var(--border-clr);
-    padding: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
 }
 
-#editor {
+.open-files span.active-tab {
+    background-color: var(--editor-bg);
+}
+
+.open-files::-webkit-scrollbar {
+    height: 0px;
+}
+
+.tab {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Remove background and border */
+    background: transparent;
+    border: none;
+
+    /* Remove padding and margin */
+    padding: 0;
+    margin: 0;
+
+    /* Inherit text styling from parent */
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    letter-spacing: inherit;
+
+    /* Make the cursor a pointer by default */
+    cursor: pointer;
+
+    /* Ensure text doesn't get cut off */
+    overflow: visible;
+
+    /* Remove box-shadow */
+    box-shadow: none;
+
+    /* Ensure proper box sizing */
+    box-sizing: border-box;
+}
+
+#tools {
+    justify-content: end;
     width: 100%;
-    height: 100%;
-    background-color: transparent;
-    border-color: var(--border-clr);
-    border-style: solid;
-    border-width: 1px;
-    color: var(--pri-clr);
-    font-size: 14px;
-}
-
-.code {
-    background-color: transparent;
-    font-family: "Space Mono", monospace, "Courier New", Courier;
-}
-
-.panel {
-    background-color: var(--panel-bg);
-}
-
-#always-show {
-    width: 30px;
-    justify-content: start;
 }
 
 .icon-btn {
@@ -104,10 +151,35 @@ body {
 }
 
 .image-btn {
-    width: 30px;
+    height: 30px;
+    filter: invert(100%);
 }
-/*-- Temp - Divider --*/
 
-#toggle-panel {
+#editor {
+    width: 100%;
+    height: 100%;
+    background-color: var(--editor-bg);
+    border-color: var(--border-clr);
+    border-style: solid;
+    border-width: 1px;
+    color: var(--pri-clr);
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    font-family: "Space Mono", monospace, "Courier New", Courier;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.main-panel {
+    background-color: var(--panel-bg);
+    text-align: center;
+    padding: 10px;
     display: none;
+}
+
+.panel {
+    width: 15vw;
 }

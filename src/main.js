@@ -18,14 +18,41 @@ const { invoke } = window.__TAURI__.core;
 // });
 
 window.addEventListener("DOMContentLoaded", () => {
-  document.querySelector(".icon-btn").addEventListener("click", () => {
+  document.querySelector("#files").addEventListener("click", () => {
     var panel = document.getElementById("toggle-panel");
     var display = getComputedStyle(panel).display;
 
     if (display == "none") {
       panel.style.display = "block";
+      // document.getElementById("toggle-run").style.display = "none";
     } else {
       panel.style.display = "none";
     }
   });
 });
+
+function enableTab(id) {
+  var el = document.getElementById(id);
+  el.onkeydown = function (e) {
+    if (e.keyCode === 9) {
+      e.preventDefault();
+      // Tab key code
+      // Get current cursor position
+      var start = this.selectionStart;
+      var end = this.selectionEnd;
+
+      // Insert tab character
+      var tabSpaces = "    ";
+      this.value =
+        this.value.substring(0, start) + tabSpaces + this.value.substring(end);
+
+      // Set cursor position back
+      this.selectionStart = this.selectionEnd = start + 4;
+
+      // Prevent default tab behavior (moving focus)
+      return false;
+    }
+  };
+}
+
+enableTab("editor");
