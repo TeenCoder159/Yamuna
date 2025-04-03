@@ -17,15 +17,11 @@
     <body>
         <main class="container">
             <div class="toolbar row">
-                <div class="open-files">
-                    <button class="tab"><span>script.js</span></button>
-                    <button class="tab"><span>remote.rs</span></button>
-                    <button class="tab">
-                        <span class="active-tab">main.py</span>
-                    </button>
+                <div id="tab-bar" class="open-files">
+                    <!--Tabs will be added here-->
                 </div>
                 <div class="row" id="tools">
-                    <button id="files" class="btn icon-btn">
+                    <button id="files-btn" class="btn icon-btn">
                         <img
                             class="image-btn"
                             id="files"
@@ -39,20 +35,24 @@
                 <div id="editor-panel">
                     <code class="code" id="testing-id">
                         <textarea autocorrect="false" id="editor">
-def main():
-    print("Hello, World")
-if __name__ == "__main__":
-    main()</textarea
-                        >
+                            <!--Code will be entered here-->
+                        </textarea>
                     </code>
                 </div>
                 <div id="toggle-panel" class="row main-panel">
-                    <div class="column panel toggle" id="toggle-file">
-                        <div id="filing">TODO! FILE STRUCTURING</div>
-                    </div>
+                    <div class="column panel toggle" id="toggle-file"></div>
                 </div>
             </div>
-            <div id="terminal"></div>
+            <div id="terminal">TODO! ADD TERMINAL FUNCTIONALITY</div>
+            <div class="row bottom-bar">
+                <button id="terminal-btn" class="btn icon-btn">
+                    <img
+                        class="image-btn"
+                        id="terminal-img"
+                        src="assets/terminal.png"
+                    />
+                </button>
+            </div>
         </main>
     </body>
 </html>
