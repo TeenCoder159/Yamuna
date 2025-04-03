@@ -27,32 +27,32 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 @font-face {
-    font-family: "Main"; /* Choose any name you want */
+    font-family: "Main";
     src: url("assets/raela-grotesque-font/RaelaGrotesqueRegular-e9476.ttf")
         format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
+html,
 body {
-    background-color: var(--bg-clr);
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     font-family: "Main", Arial, Helvetica, sans-serif;
+    background-color: var(--bg-clr);
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     background-color: var(--bg-clr);
     color: var(--pri-clr);
-}
-
-.main {
-    height: 100%;
 }
 
 .row {
@@ -66,26 +66,26 @@ body {
     align-items: center;
 }
 
-#editor-panel {
-    width: 100%;
-    height: 100vh;
-}
-
 .toolbar {
     display: flex;
-    justify-content:;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    min-height: 40px;
+    max-height: 40px;
+    width: 100%;
 }
 
 .open-files {
-    padding: 0;
     display: flex;
     overflow-x: auto;
-    width: 85vw;
+    width: 85%;
+    padding: 0;
 }
 
 .open-files span {
     padding: 8px 12px;
-    background-color: var(--element-background);
+    background-color: var(--bg-clr);
     border: 1px solid var(--border-clr);
     cursor: pointer;
     white-space: nowrap;
@@ -104,16 +104,10 @@ body {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
-    /* Remove background and border */
     background: transparent;
     border: none;
-
-    /* Remove padding and margin */
     padding: 0;
     margin: 0;
-
-    /* Inherit text styling from parent */
     color: inherit;
     font-family: inherit;
     font-size: inherit;
@@ -121,23 +115,15 @@ body {
     line-height: inherit;
     text-align: inherit;
     letter-spacing: inherit;
-
-    /* Make the cursor a pointer by default */
     cursor: pointer;
-
-    /* Ensure text doesn't get cut off */
     overflow: visible;
-
-    /* Remove box-shadow */
     box-shadow: none;
-
-    /* Ensure proper box sizing */
     box-sizing: border-box;
 }
 
 #tools {
-    justify-content: end;
-    width: 100%;
+    justify-content: flex-end;
+    width: 15%;
 }
 
 .icon-btn {
@@ -151,8 +137,20 @@ body {
 }
 
 .image-btn {
-    height: 30px;
+    height: 24px;
     filter: invert(100%);
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    position: relative;
+}
+
+#editor-panel {
+    flex: 1;
+    height: auto;
 }
 
 #editor {
@@ -167,8 +165,7 @@ body {
     outline: none;
     resize: none;
     font-family: "Space Mono", monospace, "Courier New", Courier;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 10px;
     line-height: 1.5;
     box-sizing: border-box;
 }
@@ -178,8 +175,159 @@ body {
     text-align: center;
     padding: 10px;
     display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    max-width: 250px;
 }
 
-.panel {
-    width: 15vw;
+#toggle-file {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: 10px 0;
+}
+
+#toggle-file h3 {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    font-size: 16px;
+    color: var(--pri-clr);
+}
+
+.file-tree {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: calc(100% - 30px);
+}
+
+.tree-item {
+    padding: 3px 0;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.tree-item:hover {
+    background-color: var(--hover-clr);
+}
+
+.tree-item.selected {
+    background-color: var(--active-clr);
+}
+
+.tree-item-label {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.tree-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    filter: invert(100%);
+    opacity: 0.8;
+}
+
+.folder-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    filter: invert(80%);
+}
+
+.file-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    filter: invert(90%);
+}
+
+.tree-children {
+    margin-left: 16px;
+    display: none;
+}
+
+.tree-item.expanded > .tree-children {
+    display: block;
+}
+
+.toggle-icon {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    opacity: 0.8;
+    transition: transform 0.2s;
+}
+
+.expanded > .tree-item-label .toggle-icon {
+    transform: rotate(90deg);
+}
+
+#terminal {
+    background-color: var(--editor-bg);
+    color: var(--pri-clr);
+    font-family: "Space Mono", monospace, "Courier New", Courier;
+    border: 1px solid var(--border-clr);
+    height: 200px;
+    max-height: 30%;
+    margin-top: -1px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    display: none;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+    width: 100%;
+}
+
+#terminal::before {
+    content: "$ ";
+    color: var(--accent-clr);
+    font-weight: bold;
+}
+
+.bottom-bar {
+    padding: 5px 10px;
+    background-color: var(--panel-bg);
+    border-top: 1px solid var(--border-clr);
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 35px;
+    max-height: 35px;
+    width: 100%;
+}
+
+#files-btn,
+#terminal-btn {
+    padding: 3px 6px;
+    border-radius: 3px;
+    transition: background-color 0.2s;
+}
+
+#files-btn:hover,
+#terminal-btn:hover {
+    background-color: var(--hover-clr);
+}
+
+#files-btn:active,
+#terminal-btn:active {
+    background-color: var(--active-clr);
+}
+
+#files,
+#terminal-img {
+    height: 20px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+#files-btn:hover #files-img,
+#terminal-btn:hover #terminal-img {
+    opacity: 1;
 }
