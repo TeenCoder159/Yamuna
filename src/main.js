@@ -3,11 +3,6 @@ const { invoke } = window.__TAURI__.core;
 // let greetInputEl;
 // let greetMsgEl;
 
-// async function greet() {
-//   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-//   greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
-// }
-
 // window.addEventListener("DOMContentLoaded", () => {
 //   greetInputEl = document.querySelector("#greet-input");
 //   greetMsgEl = document.querySelector("#greet-msg");
@@ -16,17 +11,44 @@ const { invoke } = window.__TAURI__.core;
 //     greet();
 //   });
 // });
+//
+function toggleVisibility(toggleID) {
+  var panel = document.getElementById(toggleID);
+  var display = getComputedStyle(panel).display;
+
+  if (display == "none") {
+    panel.style.display = "block";
+    // document.getElementById("toggle-run").style.display = "none";
+  } else {
+    panel.style.display = "none";
+  }
+}
+
+function setupToggleButton(clickID, toggleID) {
+  document.getElementById(clickID).addEventListener("click", () => {
+    toggleVisibility(toggleID);
+  });
+}
 
 window.addEventListener("DOMContentLoaded", () => {
-  document.querySelector("#files").addEventListener("click", () => {
-    var panel = document.getElementById("toggle-panel");
-    var display = getComputedStyle(panel).display;
+  setupFilePanel("../Yamuna");
 
-    if (display == "none") {
-      panel.style.display = "block";
-      // document.getElementById("toggle-run").style.display = "none";
-    } else {
-      panel.style.display = "none";
+  setupToggleButton("files", "toggle-panel");
+  setupToggleButton("terminal-btn", "terminal");
+
+  enableTab("editor");
+
+  // Use an immediately-invoked async function to call loadTabs
+  (async () => {
+    await loadTabs();
+  })();
+
+  document.addEventListener("keydown", function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === "r") {
+      toggleVisibility("toggle-panel");
+    }
+    if ((e.metaKey || e.ctrlKey) && e.key === "j") {
+      toggleVisibility("terminal");
     }
   });
 });
@@ -56,3 +78,75 @@ function enableTab(id) {
 }
 
 enableTab("editor");
+
+async function loadTabs() {
+  let tablist = ["script.js", "foo.rs", "main.py"];
+  let tabBar = document.getElementById("tab-bar");
+  let activeTab = "main.py";
+  let codeArea = document.getElementById("editor");
+
+  // Clear existing tabs
+  tabBar.innerHTML = "";
+
+  // Load the active tab content when the page loads
+  let initialContent = await get_content(activeTab);
+  codeArea.value = initialContent;
+
+  for (let i = 0; i < tablist.length; i++) {
+    // Create the tab span element that will receive styling
+    let tabSpan = document.createElement("span");
+    tabSpan.textContent = tablist[i];
+
+    // Add the active-tab class if this is the active tab
+    if (tablist[i] === activeTab) {
+      tabSpan.classList.add("active-tab");
+    }
+
+    // Add click event to switch active tab
+    tabSpan.addEventListener("click", async function () {
+      // Remove active class from all tabs
+      document.querySelectorAll("#tab-bar span").forEach((tab) => {
+        tab.classList.remove("active-tab");
+      });
+
+      // Add active class to clicked tab
+      this.classList.add("active-tab");
+
+      // Load the file content when tab is clicked
+      let fileContent = await get_content(this.textContent);
+      codeArea.value = fileContent;
+    });
+
+    // Add the tab span directly to the tab bar
+    tabBar.appendChild(tabSpan);
+  }
+}
+
+async function get_content(file) {
+  try {
+    // Wait for the Promise to resolve
+    return await invoke("contents", { file });
+  } catch (error) {
+    console.error("Error loading file:", error);
+    return "Error loading file: " + error;
+  }
+}
+
+function files(dir) {
+  return invoke("files", {
+    dir: dir,
+  });
+}
+
+function setupFilePanel(dir) {
+  let file_list = files(dir);
+  let parentDiv = document.getElementById(dir);
+
+  for (let i = 0; i < file_list.length; i++) {
+    let eachContent = document
+      .createElement("button")
+      .appendChild(document.createElement("span").append(file_list[i]));
+
+    parentDiv.append(eachContent.classList.add("eachContent"));
+  }
+}
